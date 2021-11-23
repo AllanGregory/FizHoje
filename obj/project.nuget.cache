@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "kGP75AcQnS0R6FT6vf7CqCALyYnKJCGgaYxLFfJr1U4XWTP5G3Tmw95DMuhtWe9wXXqBL3GNUXWj8RVIRjv63A==",
+  "success": true,
+  "projectFilePath": "D:\\ESTUDOS\\DOTNETCORE\\dotnetcore_mvc_rest_api_fiz_hoje\\mvc_rest_api_fiz_hoje\\mvc_rest_api_fiz_hoje.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Allan Gregory\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
