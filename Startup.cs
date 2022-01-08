@@ -34,7 +34,8 @@ namespace mvc_rest_api_fiz_hoje
 
             services.AddControllers();
 
-            services.AddScoped<IFizHojeRepo, MockFizHojeRepo>();
+            //services.AddScoped<IFizHojeRepo, MockFizHojeRepo>();
+            services.AddScoped<IFizHojeRepo, SqlFizHojeRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
