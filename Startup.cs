@@ -34,6 +34,8 @@ namespace mvc_rest_api_fiz_hoje
 
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             //services.AddScoped<IFizHojeRepo, MockFizHojeRepo>();
             services.AddScoped<IFizHojeRepo, SqlFizHojeRepo>();
         }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using AutoMapper;
 using FizHoje.Data;
+using FizHoje.Dtos;
 using FizHoje.Models;
 using Microsoft.AspNetCore.Mvc;
 using MockFizHoje.Data;
@@ -11,26 +13,37 @@ namespace FizHoje.Controllers
     public class FizHojeController : ControllerBase
     {
         private readonly IFizHojeRepo _repository;
+        private readonly IMapper _mapper;
 
-        public FizHojeController(IFizHojeRepo repository)
+        public FizHojeController(IFizHojeRepo repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         //private readonly MockFizHojeRepo _repository = new MockFizHojeRepo();
 
         //GET api/FizHoje
         [HttpGet]
-        public ActionResult <IEnumerable<FizHojeModel>> GetAllFizHoje()
+        public ActionResult <IEnumerable<FizHojeReadDto>> GetAllFizHoje()
         {
-            return Ok(_repository.GetAllFizHoje());
+            var fizHojeItems = _repository.GetAllFizHoje();
+            
+            return Ok(_mapper.Map<IEnumerable<FizHojeReadDto>>(fizHojeItems));
         }
 
         //GET api/FizHoje/{id}
         [HttpGet("{id}")]
-        public ActionResult <FizHojeModel> GetFizHojeById(int id)
+        public ActionResult <FizHojeReadDto> GetFizHojeById(int id)
         {
-            return Ok(_repository.GetFizHojeById(id));
+            var fizHojeItem = _repository.GetFizHojeById(id);
+
+            if (fizHojeItem != null)
+            {
+                return Ok(_mapper.Map<FizHojeReadDto>(fizHojeItem));
+            }
+
+            return NotFound();
         }
     }
 }
