@@ -33,7 +33,7 @@ namespace FizHoje.Controllers
         }
 
         //GET api/FizHoje/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetFizHojeById")]
         public ActionResult <FizHojeReadDto> GetFizHojeById(int id)
         {
             var fizHojeItem = _repository.GetFizHojeById(id);
@@ -44,6 +44,22 @@ namespace FizHoje.Controllers
             }
 
             return NotFound();
+        }
+
+        //POST api/FizHoje
+        [HttpPost]
+        public ActionResult <FizHojeReadDto> CreateFizHoje(FizHojeCreateDto createFizHojeDto)
+        {
+            var fizHojeModel = _mapper.Map<FizHojeModel>(createFizHojeDto);
+            _repository.CreateFizHoje(fizHojeModel);
+            _repository.SaveChanges();
+
+            var fizHojeReadDto = _mapper.Map<FizHojeReadDto>(fizHojeModel);
+
+            //Serve para retornar no Header a rota onde pode ser encontrado o objeto criado
+            return CreatedAtRoute(nameof(GetFizHojeById), new { Id = fizHojeReadDto.Id }, fizHojeReadDto);
+
+            //return Ok(fizHojeReadDto);
         }
     }
 }

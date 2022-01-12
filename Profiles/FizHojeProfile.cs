@@ -8,7 +8,9 @@ namespace FizHoje.Profiles
     {
         public FizHojeProfile()
         {
+            //Source -> Target
             CreateMap<FizHojeModel, FizHojeReadDto>();
+            CreateMap<FizHojeCreateDto, FizHojeModel>();
         }
     }
 }

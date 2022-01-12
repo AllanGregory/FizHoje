@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FizHoje.Models;
@@ -15,7 +16,12 @@ namespace FizHoje.Data
 
         public void CreateFizHoje(FizHojeModel fizHoje)
         {
-            throw new System.NotImplementedException();
+            if (fizHoje == null)
+            {
+                throw new ArgumentNullException(nameof(fizHoje));
+            }
+
+            _context.FizHoje.Add(fizHoje);
         }
 
         public void DeleteFizHoje(FizHojeModel fizHoje)
@@ -33,9 +39,10 @@ namespace FizHoje.Data
             return _context.FizHoje.FirstOrDefault(p => p.Id == id);
         }
 
+        //Esse método faz que as alterações no banco de dados aconteçam de fato
         public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return (_context.SaveChanges() >= 0);
         }
 
         public void UpdateFizHoje(FizHojeModel fizHoje)
