@@ -3,6 +3,7 @@ using AutoMapper;
 using FizHoje.Data;
 using FizHoje.Dtos;
 using FizHoje.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using MockFizHoje.Data;
 
@@ -60,6 +61,71 @@ namespace FizHoje.Controllers
             return CreatedAtRoute(nameof(GetFizHojeById), new { Id = fizHojeReadDto.Id }, fizHojeReadDto);
 
             //return Ok(fizHojeReadDto);
+        }
+
+        //PUT api/FizHoje/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateFizHoje(int id, FizHojeUpdateDto fizHojeUpdateDto)
+        {
+            var fizHojeModelFromRepo = _repository.GetFizHojeById(id);
+
+            if (fizHojeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(fizHojeUpdateDto, fizHojeModelFromRepo);
+
+            _repository.UpdateFizHoje(fizHojeModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/FizHoje/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialFizHojeUpdate(int id, JsonPatchDocument<FizHojeUpdateDto> patchDoc)
+        {
+            var fizHojeModelFromRepo = _repository.GetFizHojeById(id);
+
+            if (fizHojeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var fizHojeToPatch = _mapper.Map<FizHojeUpdateDto>(fizHojeModelFromRepo);
+            patchDoc.ApplyTo(fizHojeToPatch, ModelState);
+
+            if (!TryValidateModel(fizHojeToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(fizHojeToPatch, fizHojeModelFromRepo);
+
+            _repository.UpdateFizHoje(fizHojeModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //DELETE api/FizHoje/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteFizHoje(int id)
+        {
+            var fizHojeModelFromRepo = _repository.GetFizHojeById(id);
+
+            if (fizHojeModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteFizHoje(fizHojeModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

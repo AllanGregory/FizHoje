@@ -11,6 +11,8 @@ namespace FizHoje.Profiles
             //Source -> Target
             CreateMap<FizHojeModel, FizHojeReadDto>();
             CreateMap<FizHojeCreateDto, FizHojeModel>();
+            CreateMap<FizHojeUpdateDto, FizHojeModel>();
+            CreateMap<FizHojeModel, FizHojeUpdateDto>();
         }
     }
 }

@@ -14,8 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MockFizHoje.Data;
-
-//@@@@ 02:35:00
+using Newtonsoft.Json.Serialization;
 
 namespace mvc_rest_api_fiz_hoje
 {
@@ -34,7 +33,9 @@ namespace mvc_rest_api_fiz_hoje
             services.AddDbContext<FizHojeContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("FizHojeConnection")));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s => {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

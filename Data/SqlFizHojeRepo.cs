@@ -26,7 +26,12 @@ namespace FizHoje.Data
 
         public void DeleteFizHoje(FizHojeModel fizHoje)
         {
-            throw new System.NotImplementedException();
+            if (fizHoje == null)
+            {
+                 throw new ArgumentNullException(nameof(fizHoje));
+            }
+
+            _context.FizHoje.Remove(fizHoje);
         }
 
         public IEnumerable<FizHojeModel> GetAllFizHoje()
@@ -47,7 +52,7 @@ namespace FizHoje.Data
 
         public void UpdateFizHoje(FizHojeModel fizHoje)
         {
-            throw new System.NotImplementedException();
+            //Não faz nada
         }
     }
 }
